@@ -1,10 +1,11 @@
-import { Text, View, Image, Pressable } from 'react-native';
+import { Text, View, Image, Pressable, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCameraImage } from '../slice/PerfilSlice';
 import { useGetProfileimageQuery, usePostProfileImageMutation } from '../services/perfilService';
 import AddButton from '../components/addButton';
+import { StatusBar } from "expo-status-bar";
 
 const ImageSelector = ({ navigation }) => {
   const [image, setImage] = useState(null);
@@ -77,27 +78,35 @@ const ImageSelector = ({ navigation }) => {
   };
 
   return (
-    <View className="flex-1 items-center justify-center p-4 bg-gray-200">
-      {image || imageFromBase ? (
-        <>
-          <Image
-            className="my-4 h-48 w-48 rounded-full"
-            resizeMode="cover"
-            source={{ uri: image || imageFromBase?.image }}
-          />
-          <AddButton title="Sacar foto" onPress={pickImage} />
-          <AddButton title="Galeria" onPress={pickLibraryImage} />
-          <AddButton title="Aceptar" onPress={confirmImage} />
-        </>
-      ) : (
-        <>
-          <View className="my-4 h-48 w-48 border border-gray-300 rounded-full items-center justify-center bg-white">
-            <Text className="text-gray-500">Sin foto</Text>
-          </View>
-          <AddButton title="Sacar foto" onPress={pickImage} />
-          <AddButton title="Galeria" onPress={pickLibraryImage} />
-        </>
-      )}
+    <View className="flex-1 relative">
+      <StatusBar style="light" />
+      <Image
+        source={require("../assets/images/fondo.jpg")}
+        className="h-full w-full absolute"
+      />
+      
+      <SafeAreaView className="flex-1 items-center justify-center p-4">
+        {image || imageFromBase ? (
+          <>
+            <Image
+              className="my-4 h-48 w-48 rounded-full"
+              resizeMode="cover"
+              source={{ uri: image || imageFromBase?.image }}
+            />
+            <AddButton title="Sacar foto" onPress={pickImage} />
+            <AddButton title="Galeria" onPress={pickLibraryImage} />
+            <AddButton title="Aceptar" onPress={confirmImage} />
+          </>
+        ) : (
+          <>
+            <View className="my-4 h-48 w-48 border border-gray-300 rounded-full items-center justify-center bg-white">
+              <Text className="text-gray-500">Sin foto</Text>
+            </View>
+            <AddButton title="Sacar foto" onPress={pickImage} />
+            <AddButton title="Galeria" onPress={pickLibraryImage} />
+          </>
+        )}
+      </SafeAreaView>
     </View>
   );
 };

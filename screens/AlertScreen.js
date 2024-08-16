@@ -51,18 +51,16 @@ const AlertScreen = () => {
         <View style={{ height: "9%" }} className="mx-4  my-8 relative z-50">
           <View
             className="flex-row justify-end items-center rounded-full"
-            style={{
-              backgroundColor: showSearch ? theme.bgWhite(0.2) : "transparent",
-            }}
+            
           >
-            {showSearch ? (
+           
               <TextInput
-                onChangeText={handleTextDebounce}
-                placeholder="Ciudad...."
-                placeholderTextColor={"lightgray"}
-                className="pl-6 h-10 flex-1 text-base text-white"
-              />
-            ) : null}
+              onChangeText={handleTextDebounce}
+              placeholder="Ciudad...."
+              placeholderTextColor={"lightgray"}
+              className="pl-6 h-12 flex-1 text-base text-white  bg-gray-500/50 rounded-lg"
+            />
+            
 
             <TouchableOpacity
               onPress={() => toggleSearch(!showSearch)}

@@ -12,7 +12,6 @@ const HomeScreen = () => {
   const [weather, setWeather] = useState({});
   const [defaultCity, setDefaultCity] = useState('Buenos Aires');
 
-  // Obtener el clima de Buenos Aires cuando el componente se monta
   useEffect(() => {
     fetchWeatherForecast({
       cityName: defaultCity,
@@ -50,28 +49,23 @@ const HomeScreen = () => {
 
   return (
     <View className="flex-1 relative">
-      <StatusBar style="light" />
+      <StatusBar style="light" translucent={true} backgroundColor="transparent" />
       <Image
         source={require("../assets/images/fondo.jpg")}
         className="h-full w-full absolute"
       />
       
-      <SafeAreaView className="flex flex-1 mb-10 border-b-white">
+      <SafeAreaView className="flex flex-1 mb-10">
         <View style={{ height: "9%" }} className="mx-4 my-8 relative z-50">
           <View
             className="flex-row justify-end items-center rounded-full"
-            style={{
-              backgroundColor: showSearch ? theme.bgWhite(0.2) : "transparent",
-            }}
           >
-            {showSearch ? (
-              <TextInput
-                onChangeText={handleTextDebounce}
-                placeholder="Ciudad...."
-                placeholderTextColor={"lightgray"}
-                className="pl-6 h-10 flex-1 text-base text-white"
-              />
-            ) : null}
+            <TextInput
+              onChangeText={handleTextDebounce}
+              placeholder="Ciudad...."
+              placeholderTextColor={"lightgray"}
+              className="pl-6 h-12 flex-1 text-base text-white bg-gray-500/50 rounded-lg"
+            />
 
             <TouchableOpacity
               onPress={() => toggleSearch(!showSearch)}
@@ -84,7 +78,6 @@ const HomeScreen = () => {
           {locations.length > 0 && showSearch ? (
             <View className="absolute w-full bg-gray-300 top-16 rounded-3xl">
               {locations.map((loc, index) => {
-                let showBorder;
                 return (
                   <TouchableOpacity
                     key={index}

@@ -3,7 +3,8 @@ export const useDB = () => {
 
 
   const openDatabase = async () => {
-    const db = await SQLite.openDatabaseSync("sessions.db");
+    const db = await SQLite.openDatabaseSync("sessions.db",{ useNewConnection: true}
+   );
     return db
   }
 

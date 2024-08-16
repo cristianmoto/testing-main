@@ -14,9 +14,10 @@ const BottomTapNavigator = () => {
   return (
     <GestureHandlerRootView>
       <Tab.Navigator
-        screenOptions={{
+        screenOptions={{headerTransparent: true,
           tabBarActiveTintColor: "white",
           tabBarInactiveTintColor: "gray",
+          
           tabBarStyle: {
             backgroundColor: 'transparent',
             borderTopWidth: 1,
